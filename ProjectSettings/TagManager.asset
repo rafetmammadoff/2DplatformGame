@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - Obstacle
+  - Collectable
+  - GameplayController
+  - DeadZ
+  - Dead
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Ground
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: BG
+    uniqueID: 900574429
+    locked: 0
+  - name: Ground
+    uniqueID: 2387835725
+    locked: 0
+  - name: Obstacles
+    uniqueID: 3812696741
+    locked: 0
+  - name: Player
+    uniqueID: 3305155949
+    locked: 0
+  - name: UI
+    uniqueID: 1776109287
+    locked: 0
