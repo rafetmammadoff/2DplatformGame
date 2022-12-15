@@ -4,20 +4,21 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 7f;
+    public float moveSpeed = 7f;
     [SerializeField] float jumpForce = 20f;
     private Rigidbody2D rb2D;
-    private Animator anim;
+    public Animator anim;
     private Transform groundCheckPos;
     [SerializeField] LayerMask groundLayer;
     bool isGround = true;
     float Health = 100f;
     [SerializeField] Image HealthBar;
     [SerializeField] TMP_Text score;
-    int scoreCount = 0;
+   public int scoreCount = 0;
 
     int ufoComeCount = 0;
     [SerializeField] GameObject Ufo;
@@ -26,9 +27,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform trushPos;
     Sequence seq = DOTween.Sequence();
   [SerializeField]  List<GameObject> Trushs = new List<GameObject>();
-
+    public GameObject ObstacleSpawner;
+  
+    public static PlayerController instance;
 
     private void Awake() {
+        if (instance == null)
+        {
+            instance = this;
+        }
         rb2D = GetComponent<Rigidbody2D>();
         groundCheckPos = transform.GetChild(0).transform;
         anim = GetComponent<Animator>();
@@ -36,12 +43,12 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
-
     }
 
     void Update()
     {
         PlayerJump();
+       
     }
 
     private void FixedUpdate() {
@@ -99,6 +106,9 @@ public class PlayerController : MonoBehaviour
             moveSpeed = 0;
             anim.SetTrigger("Idle");
             Destroy(other.gameObject);
+            ObstacleSpawner.SetActive(false);
+            UIManager.instance.OpenFailPanel();
+            UIManager.instance.OpenFailPanel();
         }
 
         if (other.CompareTag("DeadZ"))
@@ -109,7 +119,11 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("Dead"))
         {
-            Time.timeScale = 0;
+            HealthBar.fillAmount = 0;   
+            //Time.timeScale = 0;
+            ObstacleSpawner.SetActive(false);
+            UIManager.instance.OpenFailPanel();
+
         }
 
 
@@ -163,6 +177,22 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
         
+    }
+    public void Restart()
+    {
+        UIManager.instance.PausePanel.SetActive(false);
+        SceneManager.LoadScene(1);
+        Time.timeScale = 1;
+    }
+    public void GoHome()
+    {
+        
+        UIManager.instance.PausePanel.SetActive(false);
+        UIManager.instance.HomePanel.SetActive(true);
+        SceneManager.LoadScene(1);
+      UIManager.instance.Button.transform.DOScale(1.25f, 1).SetLoops(-1, LoopType.Yoyo);
+        UIManager.instance.Play.transform.DORotate(new Vector3(0,0,-1.5f),1).SetLoops(-1, LoopType.Yoyo);
+
     }
 
 }

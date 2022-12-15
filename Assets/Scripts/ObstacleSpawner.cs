@@ -6,8 +6,8 @@ public class ObstacleSpawner : MonoBehaviour
 {
     [SerializeField] GameObject bigBushPrefab;
     [SerializeField] float bigBushYPos = -2.1f;
-    [SerializeField] float minSpawnWaitTime = 1f;
-    [SerializeField] float maxSpawnWaitTime = 4.5f;
+    [SerializeField] float minSpawnWaitTime = 3f;
+    [SerializeField] float maxSpawnWaitTime = 6f;
     float spawnWaitTime;
     private int obstacleTypesCount = 2;
     private int obstacleToSpawn;
@@ -47,7 +47,7 @@ public class ObstacleSpawner : MonoBehaviour
 
         obstacleToSpawn = 0;
 
-        obstacleSpawnPos.x = mainCam.transform.position.x + 20f;
+        obstacleSpawnPos.x = mainCam.transform.position.x + 40f;
 
         switch (obstacleToSpawn)
         {
